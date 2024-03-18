@@ -31,6 +31,7 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<LoginView> ();
+        builder.Services.AddTransient<SignUpView>();
         return builder;
     }
 
@@ -42,6 +43,8 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<SignUpViewModel>();
         return builder;
     }
+    
 }

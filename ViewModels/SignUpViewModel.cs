@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,23 +9,24 @@ using TriviaAppClean.Models;
 using TriviaAppClean.Services;
 using TriviaAppClean.Views;
 
+
 namespace TriviaAppClean.ViewModels
 {
-    public class LoginViewModel:ViewModelBase
+  
+    public class SignUpViewModel:ViewModelBase
     {
         private TriviaWebAPIProxy triviaService;
-        private SignUpView signUpView;
-        public LoginViewModel(TriviaWebAPIProxy service, SignUpView signupView) 
+      
+        public SignUpViewModel(TriviaWebAPIProxy service) 
         {
-            this.signUpView = signupView;
-            InServerCall = false;
             this.triviaService = service;
-            this.LoginCommand = new Command(OnLogin);
-            this.SignUpCommand = new Command(OnSignUp); 
             this.NameError = "זהו שדה חובה";
             this.PasswordError = "זהו שדה חובה ";
             this.EmailError = "מייל לא תקין ";
+            this.SignUpCommand = new Command(OnSignUp);
+
         }
+   
         #region שם
         private bool showNameError;
 
@@ -162,62 +162,12 @@ namespace TriviaAppClean.ViewModels
             this.ShowEmailError = !match.Success;
         }
         #endregion
-
-        public ICommand LoginCommand { get; set; }
-
-        private async void OnLogin()
-        {
-            //Choose the way you want to blobk the page while indicating a server call
-            InServerCall=true;
-            //await Shell.Current.GoToAsync("connectingToServer");
-            User u  = await this.triviaService.LoginAsync(email,password);
-            //await Shell.Current.Navigation.PopModalAsync();
-            InServerCall = false;
-
-            //Set the application logged in user to be whatever user returned (null or real user)
-            ((App)Application.Current).LoggedInUser = u;
-            if (u == null)
-            {
-                
-                await Application.Current.MainPage.DisplayAlert("Login", "Login Faild!", "ok");
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Login", $"Login Succeed! for {u.Name} with {u.Questions.Count} Questions", "ok");
-                Application.Current.MainPage = new AppShell();
-            }
-
-            //Application.Current.MainPage.Navigation.PushAsync(new SignupView());
-        }
         public ICommand SignUpCommand { get; set; }
         private async void OnSignUp()
         {
-             await Application.Current.MainPage.Navigation.PushAsync(this.signUpView);
 
         }
-    
 
-        private bool inServerCall;
-        public bool InServerCall
-        {
-            get
-            {
-                return this.inServerCall;
-            }
-            set
-            {
-                this.inServerCall = value;
-                OnPropertyChanged("NotInServerCall");
-                OnPropertyChanged("InServerCall");
-            }
-        }
 
-        public bool NotInServerCall
-        {
-            get
-            {
-                return !this.InServerCall;
-            }
-        }
     }
 }

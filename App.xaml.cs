@@ -13,6 +13,6 @@ public partial class App : Application
 		LoggedInUser = null;
 		InitializeComponent();
         
-        MainPage = v;
+        MainPage = new NavigationPage(v);
 	}
 }
