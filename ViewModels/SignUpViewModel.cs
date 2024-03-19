@@ -162,10 +162,49 @@ namespace TriviaAppClean.ViewModels
             this.ShowEmailError = !match.Success;
         }
         #endregion
+        private bool ValidateForm()
+        {
+            ValidateEmail();
+            ValidatePassword();
+            ValidateName();
+            if (showEmailError || showNameError || ShowPasswordError)
+            {
+                return false;   
+            }
+            return true;
+
+        }
+
         public ICommand SignUpCommand { get; set; }
         private async void OnSignUp()
         {
+            if(ValidateForm())
+            {
+                User user =new User()
+                {
+                    Name=this.name,
+                    Email=this.email,
+                    Password=this.password
+                };
+                bool succes=await triviaService.RegisterUser(user);
+                await App.Current.MainPage.DisplayAlert("Sign Up", $"Sign Up Succeed! ", "ok");
+                await App.Current.MainPage.Navigation.PopAsync(); 
+                //App.Current.MainPage = new AppShell();
 
+                if (!succes)
+                {
+                    await App.Current.MainPage.DisplayAlert("Sign up", "Sign up Faild!", "ok");
+                }
+                else
+                {
+                    await App.Current.MainPage.Navigation.PopAsync();   
+                }
+
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Sign up", "Sign up Faild!", "ok");
+            }
         }
 
 

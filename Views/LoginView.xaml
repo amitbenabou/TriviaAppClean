@@ -22,8 +22,19 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <VerticalStackLayout VerticalOptions="Center">
-       
-        
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="מייל" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+        </Grid>
+        <Entry Placeholder="הכנס מייל" Text="{Binding Email}" Style="{StaticResource entryStyle}"/>
         <!-- סיסמה -->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -38,18 +49,7 @@
         </Grid>
         <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" IsPassword="True" Style="{StaticResource entryStyle}"/>
         <!-- איימל -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label Text="מייל" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-        </Grid>
-        <Entry Placeholder="הכנס מייל" Text="{Binding Email}" Style="{StaticResource entryStyle}"/>
+       
         <Button Text="Submit Login" Command="{Binding LoginCommand}" IsEnabled="{Binding NotInServerCall}"></Button>
         <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Red"></ActivityIndicator>
         <Button Text=" Don't Have an account Sign Up" Command="{Binding SignUpCommand}" ></Button>

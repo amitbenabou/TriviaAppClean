@@ -4,11 +4,53 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:TriviaAppClean.Views"
-    Shell.FlyoutBehavior="Disabled">
+    FlowDirection="RightToLeft"
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:LoginView}"
-        Route="MainPage" />
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="=tabs">
+        <ShellContent
+            Title="התחל משחק"
+            ContentTemplate="{DataTemplate views:GameView}"
+            Route="start game"
+            />
+        <ShellContent
+            Title="פרופיל"
+            ContentTemplate="{DataTemplate views:ProfileView}" 
+            Route="profile page"
+            />
+        <ShellContent
+           Title="שיאים"
+           ContentTemplate="{DataTemplate views:HighScoresView}" 
+           Route="HighScore page"/>
+    </FlyoutItem>
+    <FlyoutItem IsVisible="{Binding IsAdmin}" FlyoutDisplayOptions="AsMultipleItems" Route="=tabs">
+        <ShellContent
+        Title="רשימת שחקנים"
+        ContentTemplate="{DataTemplate views:ShowUsersView}"
+        Route="user"
+        />
+        <ShellContent
+        Title="אישור שאלות"
+        ContentTemplate="{DataTemplate views:PendingQuestionsView}" 
+        Route="pending page"
+        />
+        <ShellContent
+       Title="הוספת שאלה"
+       ContentTemplate="{DataTemplate views:AddQuestionsView}" 
+       Route="add question page"/>
+    </FlyoutItem>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </Shell>
