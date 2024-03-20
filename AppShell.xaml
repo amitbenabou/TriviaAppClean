@@ -9,33 +9,33 @@
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="=tabs">
         <ShellContent
-            Title="התחל משחק"
+            Title="התחל משחק" Icon="play.png"
             ContentTemplate="{DataTemplate views:GameView}"
             Route="start game"
             />
         <ShellContent
-            Title="פרופיל"
+            Title="פרופיל" Icon="user.png"
             ContentTemplate="{DataTemplate views:ProfileView}" 
             Route="profile page"
             />
         <ShellContent
-           Title="שיאים"
+           Title="שיאים" Icon="highscores.png"
            ContentTemplate="{DataTemplate views:HighScoresView}" 
            Route="HighScore page"/>
     </FlyoutItem>
     <FlyoutItem IsVisible="{Binding IsAdmin}" FlyoutDisplayOptions="AsMultipleItems" Route="=tabs">
         <ShellContent
-        Title="רשימת שחקנים"
+        Title="רשימת שחקנים" Icon="playerslist.jpg" 
         ContentTemplate="{DataTemplate views:ShowUsersView}"
         Route="user"
         />
         <ShellContent
-        Title="אישור שאלות"
+        Title="אישור שאלות" Icon="pending.jpg"
         ContentTemplate="{DataTemplate views:PendingQuestionsView}" 
         Route="pending page"
         />
         <ShellContent
-       Title="הוספת שאלה"
+       Title="הוספת שאלה" Icon="addqu.png"
        ContentTemplate="{DataTemplate views:AddQuestionsView}" 
        Route="add question page"/>
     </FlyoutItem>
