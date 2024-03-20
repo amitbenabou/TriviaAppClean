@@ -2,11 +2,52 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriviaAppClean.Views.ProfileView"
-             Title="ProfileView">
+             xmlns:vm= "clr-namespace:TriviaAppClean.ViewModels"
+             x:DataType="vm:ProfileViewModel"
+             Title="פרופיל"
+              FlowDirection="RightToLeft"
+             >
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start" RowSpacing="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0"
+                               Text="{Binding Name}" HorizontalOptions="Center"
+                               FontAttributes="Bold"/>
+            <Label Grid.Column="0" Grid.Row="1"
+                               Text="{Binding Email}" 
+                               FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label Grid.Column="0" Grid.Row="2"
+                               Text="{Binding Password}" 
+                               FontAttributes="Italic" HorizontalOptions="Center"/>
+            <Label Grid.Column="0" Grid.Row="3"
+                               Text="{Binding Rank}" 
+                               FontAttributes="None" 
+                               HorizontalOptions="Center"/>
+            <Label Grid.Column="0" Grid.Row="4"
+                     Text="{Binding Score}" 
+                     FontAttributes="None" 
+                     HorizontalOptions="Center"/>
+            <Label Grid.Column="0" Grid.Row="5"
+                  
+                     Text="{Binding Id}" 
+                     FontAttributes="None" 
+                     HorizontalOptions="Center"/>
+        </Grid>
+
+
+
+
+
+
     </VerticalStackLayout>
 </ContentPage>
