@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TriviaAppClean.Models;
 using TriviaAppClean.Services;
 
@@ -11,8 +13,10 @@ namespace TriviaAppClean.ViewModels
 {
     public class ProfileViewModel:ViewModelBase
     {
+        private TriviaWebAPIProxy triviaService;
+        
 
-        public ProfileViewModel()
+        public ProfileViewModel(TriviaWebAPIProxy service)
         {
             User u = ((App)Application.Current).LoggedInUser;
             Email = u.Email;
@@ -21,6 +25,8 @@ namespace TriviaAppClean.ViewModels
             Id = u.Id;
             Score = u.Score;
             Rank = u.Rank;
+            this.UpdateCommand = new Command(onUpdate);
+            triviaService = service;
 
         }
         private string email;
@@ -109,6 +115,21 @@ namespace TriviaAppClean.ViewModels
             this.Users = new ObservableCollection<User>(list);
 
         }
+
+        public ICommand UpdateCommand
+        {
+            get; set;
+        }
+
+        private async void onUpdate()
+        {
+            User u = ((App)Application.Current).LoggedInUser;
+            u.Name = Name;
+            u.Email = Email;
+            u.Password = Password;
+            await triviaService.UpdateUser(u);    
+        }
+        
 
 
 
