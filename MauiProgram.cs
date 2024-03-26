@@ -33,6 +33,7 @@ public static class MauiProgram
         builder.Services.AddTransient<LoginView> ();
         builder.Services.AddTransient<SignUpView>();
         builder.Services.AddTransient<ProfileView>();
+        builder.Services.AddTransient<GameView>();
 
         return builder;
     }
@@ -47,7 +48,9 @@ public static class MauiProgram
         builder.Services.AddTransient<LoginViewModel>();
         builder.Services.AddTransient<SignUpViewModel>();
         builder.Services.AddTransient<ProfileViewModel>();
-       
+        builder.Services.AddTransient<GameViewModel>();
+
+
         return builder;
     }
     
