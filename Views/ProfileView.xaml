@@ -25,19 +25,19 @@
                                FontAttributes="Bold"/>
             <Label Grid.Column="0" Grid.Row="0"
                    Text="שם שחקן:" HorizontalOptions="Start"
-                   FontAttributes="Bold" TextColor="DeepPink"/>
+                   FontAttributes="Bold" TextColor="Teal"/>
             <Entry Grid.Column="0" Grid.Row="1"
                                Text="{Binding Email}" 
                                FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Grid.Column="0" Grid.Row="1"
                     Text="מייל:" 
-                    FontAttributes="Bold" HorizontalOptions="Start" TextColor="DeepPink"/>
+                    FontAttributes="Bold" HorizontalOptions="Start" TextColor="Teal"/>
             <Entry Grid.Column="0" Grid.Row="2"
                                Text="{Binding Password}" 
                                FontAttributes="Bold" HorizontalOptions="Center"/>
             <Label Grid.Column="0" Grid.Row="2"
                     Text="סיסמה:" 
-                    FontAttributes="Bold" HorizontalOptions="Start" TextColor="DeepPink"/>
+                    FontAttributes="Bold" HorizontalOptions="Start" TextColor="Teal"/>
             <Label Grid.Column="0" Grid.Row="3"
                                Text="{Binding Rank}" 
                                FontAttributes="None" 
@@ -45,7 +45,7 @@
             <Label Grid.Column="0" Grid.Row="3"
                    Text="דרגה:" 
                    FontAttributes="None" 
-                   HorizontalOptions="Start" TextColor="DeepPink"/>
+                   HorizontalOptions="Start" TextColor="Teal"/>
             <Label Grid.Column="0" Grid.Row="4"
                      Text="{Binding Score}" 
                      FontAttributes="None" 
@@ -53,7 +53,7 @@
             <Label Grid.Column="0" Grid.Row="4"
          Text="ניקוד:" 
          FontAttributes="None" 
-         HorizontalOptions="Start" TextColor="DeepPink"/>
+         HorizontalOptions="Start" TextColor="Teal"/>
             <Label Grid.Column="0" Grid.Row="5"
                   
                      Text="{Binding Id}" 
@@ -63,7 +63,7 @@
       
          Text="מספר שחקן:" 
          FontAttributes="None" 
-         HorizontalOptions="Start" TextColor="DeepPink"/>
+         HorizontalOptions="Start" TextColor="Teal"/>
         </Grid>
         <Button Text="עדכן נתונים" BackgroundColor="LightPink" Command="{Binding UpdateCommand}" Margin="80" Padding="20" />
 

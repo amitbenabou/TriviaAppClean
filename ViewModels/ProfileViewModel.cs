@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TriviaAppClean.Models;
@@ -27,6 +28,9 @@ namespace TriviaAppClean.ViewModels
             Rank = u.Rank;
             this.UpdateCommand = new Command(onUpdate);
             triviaService = service;
+            this.NameError = "זהו שדה חובה";
+            this.PasswordError = "זהו שדה חובה ";
+            this.EmailError = "מייל לא תקין ";
 
         }
         private string email;
@@ -53,13 +57,14 @@ namespace TriviaAppClean.ViewModels
             set
             {
                 this.userService = value;
+                OnPropertyChanged();
             }
         }
         public int Id
         {
 
             get { return id; }
-            set { id = value; }
+            set { id = value; OnPropertyChanged(); }
         }
         public string Name
         {
@@ -70,6 +75,8 @@ namespace TriviaAppClean.ViewModels
             set
             {
                 name = value;
+                ValidateName();
+                OnPropertyChanged("Name");
             }
         }
         public string Email
@@ -81,12 +88,15 @@ namespace TriviaAppClean.ViewModels
             set
             {
                 this.email = value;
+                ValidateEmail();
+                OnPropertyChanged("Email");
             }
         }
         public string Password
         {
             get { return password; }
-            set { this.password = value; }
+            set { this.password = value; ValidatePassword();
+                OnPropertyChanged("Password"); }
         }
         public int Score
         {
@@ -94,7 +104,7 @@ namespace TriviaAppClean.ViewModels
             {
                 return score;
             }
-            set { score = value; }
+            set { score = value; OnPropertyChanged(); }
         }
         public int Rank
         {
@@ -105,6 +115,7 @@ namespace TriviaAppClean.ViewModels
             set
             {
                 rank = value;
+                OnPropertyChanged();
             }
         }
 
@@ -121,13 +132,128 @@ namespace TriviaAppClean.ViewModels
             get; set;
         }
 
+        #region שם
+        private bool showNameError;
+
+        public bool ShowNameError
+        {
+            get => showNameError;
+            set
+            {
+                showNameError = value;
+                OnPropertyChanged("ShowNameError");
+            }
+        }
+
+        private string nameError;
+
+        public string NameError
+        {
+            get => nameError;
+            set
+            {
+                nameError = value;
+                OnPropertyChanged("NameError");
+            }
+        }
+
+        private void ValidateName()
+        {
+            this.ShowNameError = string.IsNullOrEmpty(Name);
+        }
+        #endregion
+
+        #region סיסמא
+        private bool showPasswordError;
+
+        public bool ShowPasswordError
+        {
+            get => showPasswordError;
+            set
+            {
+                showPasswordError = value;
+                OnPropertyChanged("ShowPasswordError");
+            }
+        }
+
+        private string passwordError;
+
+        public string PasswordError
+        {
+            get => passwordError;
+            set
+            {
+                passwordError = value;
+                OnPropertyChanged("PasswordError");
+            }
+        }
+
+        private void ValidatePassword()
+        {
+            this.ShowPasswordError = string.IsNullOrEmpty(Password);
+        }
+        #endregion
+
+        #region מייל
+        private bool showEmailError;
+
+        public bool ShowEmailError//ShowEmailError
+        {
+            get => showNameError;
+            set
+            {
+                showNameError = value;
+                OnPropertyChanged("ShowEmailError");
+            }
+        }
+        private string emailError;
+
+        public string EmailError
+        {
+            get => emailError;
+            set
+            {
+                emailError = value;
+                OnPropertyChanged("EmailError");
+            }
+        }
+
+        private void ValidateEmail()
+        {
+            string email = Email;
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(email);
+            this.ShowEmailError = !match.Success;
+        }
+        #endregion
+        private bool ValidateForm()
+        {
+            ValidateEmail();
+            ValidatePassword();
+            ValidateName();
+            if (showEmailError || showNameError || ShowPasswordError)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
         private async void onUpdate()
         {
-            User u = ((App)Application.Current).LoggedInUser;
-            u.Name = Name;
-            u.Email = Email;
-            u.Password = Password;
-            await triviaService.UpdateUser(u);    
+            if (ValidateForm())
+            {
+                User u = ((App)Application.Current).LoggedInUser;
+                u.Name = Name;
+                u.Email = Email;
+                u.Password = Password;
+                await Shell.Current.GoToAsync("connectingToServer");
+                bool success = await triviaService.UpdateUser(u);
+                await Shell.Current.Navigation.PopModalAsync();
+
+
+            }
+
         }
         
 
