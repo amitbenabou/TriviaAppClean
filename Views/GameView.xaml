@@ -11,55 +11,31 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+             
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Entry Grid.Column="0" Grid.Row="0"
-                       Text="{Binding Name}" HorizontalOptions="Center"
-                       FontAttributes="Bold"/>
             <Label Grid.Column="0" Grid.Row="0"
-           Text="שם שחקן:" HorizontalOptions="Start"
-           FontAttributes="Bold" TextColor="DeepPink"/>
-            <Entry Grid.Column="0" Grid.Row="1"
-                       Text="{Binding Email}" 
-                       FontAttributes="Bold" HorizontalOptions="Center" />
+            Text="{Binding Score}" 
+            FontAttributes="None" 
+        HorizontalOptions="Start" TextColor="DeepPink"/>
             <Label Grid.Column="0" Grid.Row="1"
-            Text="מייל:" 
-            FontAttributes="Bold" HorizontalOptions="Start" TextColor="DeepPink"/>
-            <Entry Grid.Column="0" Grid.Row="2"
-                       Text="{Binding Password}" 
-                       FontAttributes="Bold" HorizontalOptions="Center"/>
-            <Label Grid.Column="0" Grid.Row="2"
-            Text="סיסמה:" 
-            FontAttributes="Bold" HorizontalOptions="Start" TextColor="DeepPink"/>
-            <Label Grid.Column="0" Grid.Row="3"
-                       Text="{Binding Rank}" 
-                       FontAttributes="None" 
-                       HorizontalOptions="Center"/>
-            <Label Grid.Column="0" Grid.Row="3"
-           Text="דרגה:" 
-           FontAttributes="None" 
-           HorizontalOptions="Start" TextColor="DeepPink"/>
-            <Label Grid.Column="0" Grid.Row="4"
-             Text="{Binding Score}" 
-             FontAttributes="None" 
-             HorizontalOptions="Center"/>
-            <Label Grid.Column="0" Grid.Row="4"
- Text="ניקוד:" 
- FontAttributes="None" 
- HorizontalOptions="Start" TextColor="DeepPink"/>
-            <Label Grid.Column="0" Grid.Row="5"
-          
-             Text="{Binding Id}" 
-             FontAttributes="None" 
-             HorizontalOptions="Center"/>
-            <Label Grid.Column="0" Grid.Row="5"
-      
- Text="מספר שחקן:" 
- FontAttributes="None" 
- HorizontalOptions="Start" TextColor="DeepPink"/>
+                       Text="{Binding  Question.QText}" HorizontalOptions="Center"
+                       FontAttributes="Bold"/>
+            <Button Grid.Column="0" Grid.Row="1" BackgroundColor="{Binding Answer1Color}"
+           Text="{Binding Answers[0]}"  HorizontalOptions="Start"
+           FontAttributes="Bold" Command="{Binding AnswerCommand1 }" />
+            <Button Grid.Column="0" Grid.Row="2"
+            Text="{Binding Answers[1]}"  HorizontalOptions="Start"
+               FontAttributes="Bold" Command="{Binding AnswerCommand2 }" BackgroundColor="{Binding Answer2Color}"/>
+            <Button Grid.Column="0" Grid.Row="3"
+            Text="{Binding Answers[2]}"  HorizontalOptions="Start"
+            FontAttributes="Bold" Command="{Binding AnswerCommand3 }" BackgroundColor="{Binding Answer3Color}"/>
+            <Button Grid.Column="0" Grid.Row="4"
+            Text="{Binding Answers[3]}"  HorizontalOptions="Start"
+             FontAttributes="Bold" Command="{Binding AnswerCommand4 }" BackgroundColor="{Binding Answer4Color}"/>
+         
         </Grid>
         <Button Text="לשאלה הבאה" BackgroundColor="LightPink" Command="{Binding NextQuestionCommand}" Margin="80" Padding="20" />
 
