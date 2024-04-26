@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.ApplicationModel.Communication;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace TriviaAppClean.ViewModels
         public HighScoresViewModel(TriviaWebAPIProxy service)
         {
             triviaService = service;
+            this.SearchCommand = new Command(OnSearch);
             ReadUsers();
         }
 
@@ -59,11 +61,31 @@ namespace TriviaAppClean.ViewModels
         }
         private async void ReadUsers()
         {
-            //TriviaWebAPIProxy service = this.userService;
             List<User> list = await triviaService.GetAllUsers();
             list = list.OrderByDescending(u => u.Score).ToList();
             this.Users = new ObservableCollection<User>(list);
         }
 
+        private string searchText = string.Empty;
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                searchText = value ?? string.Empty;
+                if (searchText == string.Empty) ReadUsers();
+                OnPropertyChanged("SearchText");
+            }
+        }
+        public ICommand SearchCommand { get; set; }
+
+        private async void OnSearch()
+        {
+            List<User> list = await triviaService.GetAllUsers();
+            List<User> listSearch = new List<User>();
+            var searchQuery = searchText?.ToLower() ?? "";
+            listSearch = list.Where(u => u.Name.Contains(searchQuery)).ToList();
+            this.Users = new ObservableCollection<User>(listSearch);
+        }
     }
 }

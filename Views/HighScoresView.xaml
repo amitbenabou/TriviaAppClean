@@ -6,12 +6,24 @@
              x:DataType="vm:HighScoresViewModel"
              Title="רשימת שיאים"
              FlowDirection="RightToLeft">
-    <CollectionView ItemsSource="{Binding Users}"
+    <StackLayout>
+        <Label Text="highscores!!" TextColor="Magenta" FontSize="Title" HorizontalOptions="Center" FontAttributes="Bold" />
+
+        <SearchBar
+            Placeholder="Search users..." 
+            HorizontalOptions="EndAndExpand" 
+            Background="LightGray" 
+            CancelButtonColor="DarkGray"
+            Margin="20"  
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding SearchText}" />
+
+        <CollectionView ItemsSource="{Binding Users}"
                 ItemsLayout="VerticalList" x:Name="theCollectionView">
         <CollectionView.ItemTemplate>
             <DataTemplate>
 
-                <Grid Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Grid Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Margin="20" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         
@@ -20,11 +32,10 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Grid.Row="0"
-                               Source="{Binding Name}" />
+                    
                     <Label Grid.Column="1" Grid.Row="0"
                                Text="{Binding Name}" 
-                               FontAttributes="Bold" HorizontalOptions="Center"/>
+                               FontAttributes="Bold" BackgroundColor="LavenderBlush"  HorizontalOptions="Center"/>
                     <Label Grid.Column="0" Grid.Row="1"
                                Text="{Binding Score}" 
                                FontAttributes="Italic"/>
@@ -32,4 +43,5 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+    </StackLayout>
 </ContentPage>

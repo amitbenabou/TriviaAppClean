@@ -2,11 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriviaAppClean.Views.AddQuestionsView"
-             Title="AddQuestionsView">
+             xmlns:vm= "clr-namespace:TriviaAppClean.ViewModels"
+             x:DataType="vm:AddQuestionViewModel"
+             Title="הוספת שאלה"
+             FlowDirection="RightToLeft">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+
+
+        <Label Text="הוספת שאלה" Margin="5" FontSize="Title" TextColor="Magenta" HorizontalOptions="Center" FontAttributes="Bold"/>
+
+        <Label Text="תוכן השאלה"/>
+        <Entry Placeholder="הכנס שאלה..." Text="{Binding QuestionText}"/>
+
+        <Label Text="תשובה נכונה"/>
+        <Entry Placeholder="הכנס תשובה אחת נכונה..." Text="{Binding CorrectAnswer}"/>
+
+        <Label Text="תשובה שגויה ראשונה" />
+        <Entry Placeholder="הכנס תשובה שגויה..." Text="{Binding WrongAnswer1}"/>
+
+        <Label Text="תשובה שגויה שניה" />
+        <Entry Placeholder="הכנס תשובה שגויה..." Text="{Binding WrongAnswer2}"/>
+
+        <Label Text="תשובה שגויה שלישית" />
+        <Entry Placeholder="הכנס תשובה שגויה..." Text="{Binding WrongAnswer3}"/>
+
+        <Label Text="{Binding IfInValid}"
+       TextColor="Red"
+       IsVisible="{Binding ShowIfInValid}"/>
+
+        <Button Text="Add Question"
+                Style="{StaticResource EnterButton}"
+                IsEnabled="{Binding CanAddQuestion}"
+                Command="{Binding AddingCommand}"/>
+
     </VerticalStackLayout>
 </ContentPage>
