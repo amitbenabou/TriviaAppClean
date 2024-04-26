@@ -2,34 +2,34 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriviaAppClean.Views.HighScoresView"
-              xmlns:vm= "clr-namespace:TriviaAppClean.ViewModels"
-              x:DataType="vm:HighScoresViewModel"
-              Title="רשימת שיאים"
-              FlowDirection="RightToLeft">
-    <StackLayout>
-        <Label Text="הבסט שחקנים" FontSize="Title" TextColor="DeepPink" HorizontalOptions="Center"/>
-        <CollectionView ItemsSource="{Binding Users}"
-                ItemsLayout="VerticalGrid, 1">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0"
-                               Text="{Binding Name}" 
-                               FontAttributes="Bold" VerticalOptions="End"/>
-                        <Label Grid.Column="1" Grid.Row="0"
-                               Text="{Binding Score}" 
-                               FontAttributes="Bold" HorizontalOptions="Start"/>
+             xmlns:vm= "clr-namespace:TriviaAppClean.ViewModels"
+             x:DataType="vm:HighScoresViewModel"
+             Title="רשימת שיאים"
+             FlowDirection="RightToLeft">
+    <CollectionView ItemsSource="{Binding Users}"
+                ItemsLayout="VerticalList" x:Name="theCollectionView">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+
+                <Grid Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
                         
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Grid.Row="0"
+                               Source="{Binding Name}" />
+                    <Label Grid.Column="1" Grid.Row="0"
+                               Text="{Binding Name}" 
+                               FontAttributes="Bold" HorizontalOptions="Center"/>
+                    <Label Grid.Column="0" Grid.Row="1"
+                               Text="{Binding Score}" 
+                               FontAttributes="Italic"/>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

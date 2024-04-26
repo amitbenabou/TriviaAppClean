@@ -13,20 +13,18 @@ using TriviaAppClean.Services;
 
 namespace TriviaAppClean.ViewModels
 {
-    internal class HighScoresViewModel : ViewModelBase
+    public class HighScoresViewModel : ViewModelBase
     {
         private TriviaWebAPIProxy triviaService;
 
         public HighScoresViewModel(TriviaWebAPIProxy service)
         {
-            
             triviaService = service;
             ReadUsers();
         }
 
         private string name;
         private int score;
-
 
         private ObservableCollection<User> users;
         public ObservableCollection<User> Users
@@ -39,17 +37,6 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged();
             }
         }
-        private TriviaWebAPIProxy userService;
-        public TriviaWebAPIProxy UserService
-        {
-            get { return userService; }
-            set
-            {
-                this.userService = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string Name
         {
             get
@@ -59,7 +46,7 @@ namespace TriviaAppClean.ViewModels
             set
             {
                 name = value;
-                
+
             }
         }
         public int Score
@@ -68,16 +55,15 @@ namespace TriviaAppClean.ViewModels
             {
                 return score;
             }
-            set { score = value;  }
+            set { score = value; }
         }
         private async void ReadUsers()
         {
-            TriviaWebAPIProxy service = this.userService;
-            List<User> list = await service.GetAllUsers();
+            //TriviaWebAPIProxy service = this.userService;
+            List<User> list = await triviaService.GetAllUsers();
             list = list.OrderByDescending(u => u.Score).ToList();
             this.Users = new ObservableCollection<User>(list);
         }
-        
 
     }
 }
