@@ -16,10 +16,29 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Label  Grid.Column="0" Grid.Row="0"
+                    Text="{Binding Name}"
+                    FontSize="Medium"
+                    TextColor="DeepPink"
+                    HorizontalOptions="Center"
+                    />
+            <Label Grid.Column="0" Grid.Row="0" 
+                   Text=" ------שם השחקן------ "
+                   TextColor="DeepPink"
+                   FontSize="Medium"
+                   HorizontalOptions="End"/>
+            
+
             <Label Grid.Column="0" Grid.Row="0"
-            Text="{Binding Score}" 
+             
+                Text="{Binding Score}" 
             FontAttributes="None" 
-        HorizontalOptions="Start" TextColor="DeepPink"/>
+    HorizontalOptions="Start"  TextColor="DeepPink"/>
+            <Label Grid.Column="0" Grid.Row="0"
+       Text="   ניקוד   השחקן   -        " 
+       FontAttributes="None" 
+                   FontSize="Title"
+       HorizontalOptions="Start" TextColor="DeepPink"/>
             <Label Grid.Column="0" Grid.Row="1"
                        Text="{Binding  Question.QText}" HorizontalOptions="Center"
                        FontAttributes="Bold"/>

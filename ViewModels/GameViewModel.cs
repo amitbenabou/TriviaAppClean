@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using TriviaAppClean.Models;
 using TriviaAppClean.Services;
 
@@ -76,6 +77,8 @@ namespace TriviaAppClean.ViewModels
         public GameViewModel(TriviaWebAPIProxy service)
         {
             this.triviaService = service;
+            User u = ((App)Application.Current).LoggedInUser;
+            Name = u.Name;
             this.NextQuestionCommand = new Command(GetQuestion);
             this.AnswerCommand1 = new Command(GetCorrectAnswer1);
             this.AnswerCommand2 = new Command(GetCorrectAnswer2);
@@ -86,8 +89,23 @@ namespace TriviaAppClean.ViewModels
             this.Answer3Color = new Color();
             this.Answer4Color = new Color();
             Answers = new ObservableCollection<string>();
+         
             GetQuestion();
 
+        }
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+              
+                OnPropertyChanged("Name");
+            }
         }
         private AmericanQuestion question;
         public AmericanQuestion Question
@@ -139,6 +157,10 @@ namespace TriviaAppClean.ViewModels
             this.Answers.Add(Question.Bad1);
             this.Answers.Add(Question.Bad2);
             this.Answers.Add(Question.Bad3);
+            this.Answer1Color = new Color();
+            this.Answer2Color = new Color();
+            this.Answer3Color = new Color();
+            this.Answer4Color = new Color();
             OnPropertyChanged("Answers");
 
 
@@ -152,11 +174,11 @@ namespace TriviaAppClean.ViewModels
             {
                 if (question.CorrectAnswer == answer)
                 {
-                    score = score + 10;
+                    Score = Score + 10;
                     Answer1Color = Colors.Green;
                 }
-
-                Answer1Color = Colors.Red;
+                else { Answer1Color = Colors.Red; }
+               
 
             }
         }
@@ -167,11 +189,11 @@ namespace TriviaAppClean.ViewModels
             {
                 if (question.CorrectAnswer == answer)
                 {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
+                    Score = Score + 10;
+                    Answer2Color = Colors.Green;
                 }
-
-                Answer1Color = Colors.Red;
+                else { Answer2Color = Colors.Red; }
+              
 
             }
         }
@@ -182,11 +204,11 @@ namespace TriviaAppClean.ViewModels
             {
                 if (question.CorrectAnswer == answer)
                 {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
+                    Score = Score + 10;
+                    Answer3Color = Colors.Green;
                 }
-
-                Answer1Color = Colors.Red;
+                else { Answer3Color = Colors.Red; }
+                
 
             }
         }
@@ -197,11 +219,11 @@ namespace TriviaAppClean.ViewModels
             {
                 if (question.CorrectAnswer == answer)
                 {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
+                    Score = Score + 10;
+                    Answer4Color = Colors.Green;
                 }
-
-                Answer1Color = Colors.Red;
+                else { Answer4Color = Colors.Red; }
+              
 
             }
         }
